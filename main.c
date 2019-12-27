@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "modules/initTab.h"
 
 void cursorPosition(int YPos, int XPos)
  {
-    printf("\033[%d;%dH",YPos+1,XPos+1);
+    printf("\033[%d;%dH",YPos,XPos);
 }
 
 
@@ -13,8 +14,26 @@ int main()
 	system("clear");
 
 
-	int emojiF[3][5];
-	float *prixF[15];
+	char* emojiF[] =
+    {
+        "🍓",
+        "🍇",
+        "🍏",
+        "🍎",
+        "🍐",
+        "🍊",
+        "🍋",
+        "🍌",
+        "🍉",
+        "🍈",
+        "🍒",
+        "🍑",
+        "🥥",
+        "🍍",
+        "🥝",
+    };
+
+	float prixF[15];
     char codeF[15][4] = 
     { 
         "F00",
@@ -33,7 +52,7 @@ int main()
         "F14",
     };
 
-	int emojiL[3][5];
+	char* emojiL[];
 	float prixL[15];
     char codeL[15][4] = 
     { 
@@ -53,7 +72,7 @@ int main()
         "L14",
     };
 
-	int emojiV[3][5];
+	char* emojiV[];
 	float prixV[15];
     char codeV[15][4] = 
     { 
@@ -73,6 +92,9 @@ int main()
         "V14",
     };
 
+    initPrixF(prixF);
+    initPrixL(prixL);
+    initPrixV(prixV);
 
     int caractereActuel = 0;
     FILE* fichier = NULL;
@@ -88,6 +110,7 @@ int main()
 
 
     fclose(fichier);
+
 
     return 0;
 }
