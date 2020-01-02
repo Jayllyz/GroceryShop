@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "modules/initTab.h"
+#include "modules/recupPrix.h"
 
 void cursorPosition(int YPos, int XPos)
  {
@@ -34,7 +35,7 @@ int main()
     };
 
 	float prixF[15];
-    char codeF[15][4] = 
+    char *codeF[][15] = 
     { 
         "F00",
         "F01",
@@ -72,7 +73,7 @@ int main()
     };
 
 	float prixL[15];
-    char codeL[15][4] = 
+    char *codeL[][15] = 
     { 
         "L00",
         "L01",
@@ -109,7 +110,7 @@ int main()
         "🐋",
     };
 	float prixV[15];
-    char codeV[15][4] = 
+    char *codeV[][15] = 
     { 
         "V00",
         "V01",
@@ -140,10 +141,13 @@ int main()
         printf("%c", caractereActuel);
     } while ( caractereActuel != EOF);
     
-    cursorPosition(20,100);
-    printf("salut");
-
-
+    cursorPosition(29,27);
+    char code[4];
+    scanf("%s", code);
+    printf("%s", code);
+    float prix = recupPrix(code,*codeF,*codeL,*codeV,prixF,prixL,prixV);
+    cursorPosition(0,0);
+    printf("prix : %f", prix);
     fclose(fichier);
 
 
