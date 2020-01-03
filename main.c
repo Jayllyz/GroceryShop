@@ -140,17 +140,27 @@ int main()
         caractereActuel = fgetc(fichier); // On lit le caractère
         printf("%c", caractereActuel);
     } while ( caractereActuel != EOF);
-    
+
     cursorPosition(29,27);
     char code[4];
     scanf("%s", code);
     printf("%s", code);
-    float prix = 0;
-    float *p;
-    p = &prix;
-    recupPrix(code,p,codeF,codeL,codeV,prixF,prixL,prixV);
     cursorPosition(0,0);
-    printf("prix : %f", prix);
+    int i = 0;
+    i = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV); 
+    if ( code[0] == 'F')
+    {
+        printf("%f", prixF[i]);
+    }
+    if( code[0] == 'L')
+    {
+        printf("%f", prixL[i]);
+    }
+    if( code[0] == 'V')
+    {
+        printf("%f", prixV[i]);
+
+    }
     fclose(fichier);
 
 

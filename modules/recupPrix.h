@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 
-
-float recupPrix(char code[], float *prix, char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[])
+int recupPrix(char code[], char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[])
 {
     int i = 0;
 		if(code[0] == 'F')
@@ -12,36 +11,31 @@ float recupPrix(char code[], float *prix, char codeF[15][4], char codeL[15][4], 
         	{
             	if (codeF[i] == code)
             	{
-                *prix = prixF[i];
-            	}
-        }	}
-		i =0;
+					return i;
+        	  	}
+			}
+		}
+	i=0;
     	if(code[0] == 'L')
     	{
         	for (i = 0; i < 15; i++)   
         	{
             	if (codeL[i] == code)
             	{
-                *prix = prixL[i];
+					return i;
             	}
         	}
     	}
-		i=0;
+	i=0;
     	if(code[0] == 'V')
     	{
         	for (i = 0; i < 15; i++)   
         	{
             	if (codeV[i] == code)
             	{
-                *prix = prixV[i];
+					return i;
             	}
             }
         }
-    
-    	else
-    	{
-        printf("erreur");
-    	}
-    
-   
+
 }
