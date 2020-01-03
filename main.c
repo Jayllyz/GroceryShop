@@ -3,6 +3,7 @@
 #include <string.h>
 #include "modules/initTab.h"
 #include "modules/recupPrix.h"
+#include "modules/payement.h"
 
 void cursorPosition(int YPos, int XPos)
  {
@@ -148,8 +149,14 @@ int main()
     float prix = 0;
     prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV);
     cursorPosition(27,115); 
-    printf("%f", prix);
-   
+    printf("%.2f", prix);
+
+    cursorPosition(28,115);
+    float recu = payement(prix);
+    cursorPosition(29,115);
+    printf("%.2f", recu);
+
+    
     fclose(fichier);
 
 
