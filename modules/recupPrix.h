@@ -5,35 +5,37 @@
 int recupPrix(char code[], char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[])
 {
     int i = 0;
+	int j=0;
+	int k=0;
 		if(code[0] == 'F')
     	{	
-        	for (i = 0; i < 15 ; i++)   
+        	for (i = 0; i <= 15 ; i++)   
         	{
-            	if (codeF[i] == code)
+            	if ((strcmp(code,codeF[i]) == 0))
             	{
 					return i;
         	  	}
 			}
 		}
-	i=0;
+	
     	if(code[0] == 'L')
     	{
-        	for (i = 0; i < 15; i++)   
+        	for (j = 0; j <= 15; i++)   
         	{
-            	if (codeL[i] == code)
+            	if ((strcmp(code,codeL[i]) == 0))
             	{
-					return i;
+					return j;
             	}
         	}
     	}
-	i=0;
+
     	if(code[0] == 'V')
     	{
-        	for (i = 0; i < 15; i++)   
+        	for (k = 0; k <= 15; i++)   
         	{
-            	if (codeV[i] == code)
+            	if ((strcmp(code,codeV[i]) == 0))
             	{
-					return i;
+					return k;
             	}
             }
         }

@@ -143,24 +143,13 @@ int main()
 
     cursorPosition(29,27);
     char code[4];
-    scanf("%s", code);
+    scanf("%s", code);   
     printf("%s", code);
-    cursorPosition(0,0);
-    int i = 0;
-    i = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV); 
-    if ( code[0] == 'F')
-    {
-        printf("%f", prixF[i]);
-    }
-    if( code[0] == 'L')
-    {
-        printf("%f", prixL[i]);
-    }
-    if( code[0] == 'V')
-    {
-        printf("%f", prixV[i]);
-
-    }
+    float prix = 0;
+    prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV);
+    cursorPosition(27,115); 
+    printf("%f", prix);
+   
     fclose(fichier);
 
 
