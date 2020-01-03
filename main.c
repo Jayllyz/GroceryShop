@@ -35,7 +35,7 @@ int main()
     };
 
 	float prixF[15];
-    char *codeF[][15] = 
+    char codeF[15][4] = 
     { 
         "F00",
         "F01",
@@ -73,7 +73,7 @@ int main()
     };
 
 	float prixL[15];
-    char *codeL[][15] = 
+    char codeL[15][4] = 
     { 
         "L00",
         "L01",
@@ -110,7 +110,7 @@ int main()
         "🐋",
     };
 	float prixV[15];
-    char *codeV[][15] = 
+    char codeV[15][4] = 
     { 
         "V00",
         "V01",
@@ -145,7 +145,10 @@ int main()
     char code[4];
     scanf("%s", code);
     printf("%s", code);
-    float prix = recupPrix(code,*codeF,*codeL,*codeV,prixF,prixL,prixV);
+    float prix = 0;
+    float *p;
+    p = &prix;
+    recupPrix(code,p,codeF,codeL,codeV,prixF,prixL,prixV);
     cursorPosition(0,0);
     printf("prix : %f", prix);
     fclose(fichier);

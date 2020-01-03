@@ -3,40 +3,45 @@
 
 
 
-float recupPrix(char code[], char codeF[15], char codeL[15], char codeV[15], float prixF[15], float prixL[15], float prixV[15])
+float recupPrix(char code[], float *prix, char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[])
 {
-    if(code[0] == 'F')
-    {
-     int i;
-        for (i = 0; codeF[i] !='\0'; i++)   
-        {
-            if (codeF[i] == *code)
-            {
-                return prixF[i];
+    int i = 0;
+		if(code[0] == 'F')
+    	{	
+        	for (i = 0; i < 15 ; i++)   
+        	{
+            	if (codeF[i] == code)
+            	{
+                *prix = prixF[i];
+            	}
+        }	}
+		i =0;
+    	if(code[0] == 'L')
+    	{
+        	for (i = 0; i < 15; i++)   
+        	{
+            	if (codeL[i] == code)
+            	{
+                *prix = prixL[i];
+            	}
+        	}
+    	}
+		i=0;
+    	if(code[0] == 'V')
+    	{
+        	for (i = 0; i < 15; i++)   
+        	{
+            	if (codeV[i] == code)
+            	{
+                *prix = prixV[i];
+            	}
             }
         }
-    }
-    if(code[0] == 'L')
-    {
-     int i;
-        for (i = 0; codeL[i] !='\0'; i++)   
-        {
-            if (codeL[i] == *code)
-            {
-                return prixL[i];
-            }
-        }
-    }
-    if(code[0] == 'V')
-    {
-     int i;
-        for (i = 0; codeV[i] !='\0'; i++)   
-        {
-            if (codeV[i] == *code)
-            {
-                return prixV[i];
-            }
-        }
-    }
     
+    	else
+    	{
+        printf("erreur");
+    	}
+    
+   
 }
