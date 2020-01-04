@@ -5,7 +5,7 @@
 #include "modules/recupPrix.h"
 #include "modules/payement.h"
 
-void cursorPosition(int YPos, int XPos)
+void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
  {
     printf("\033[%d;%dH",YPos,XPos);
 }
@@ -13,10 +13,10 @@ void cursorPosition(int YPos, int XPos)
 
 int main()
 {
-	system("clear");
+	system("clear"); //clear le terminal avant (ca fonctionne pas rip)
 
 
-	char* emojiF[] =
+	char* emojiF[] = //chaine pour stocker les emoji
     {
         "🍓",
         "🍇",
@@ -35,8 +35,8 @@ int main()
         "🥝",
     };
 
-	float prixF[15];
-    char codeF[15][4] = 
+	float prixF[15]; // tab des prix init dans le fichier initTab
+    char codeF[15][4] =  //chaine pour les codes
     { 
         "F00",
         "F01",
@@ -129,30 +129,30 @@ int main()
         "V14",
     };
 
-    initPrixF(prixF);
+    initPrixF(prixF); //initialisation des valeurs pour les tab 
     initPrixL(prixL);
     initPrixV(prixV);
 
     int caractereActuel = 0;
     FILE* fichier = NULL;
-    fichier = fopen("vitrine.txt", "r");
+    fichier = fopen("vitrine.txt", "r"); //on ouvre le fichier en lecture
     do
     {
         caractereActuel = fgetc(fichier); // On lit le caractère
         printf("%c", caractereActuel);
-    } while ( caractereActuel != EOF);
+    } while ( caractereActuel != EOF); //tant que le fichier n'est pas terminé
 
-    cursorPosition(29,27);
-    char code[4];
+    cursorPosition(29,27); //on mets le curseur à l'endroit pour prendre le code
+    char code[4]; // on stocke ce code dans une chaine
     scanf("%s", code);   
     printf("%s", code);
     float prix = 0;
-    prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV);
+    prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV); //ensuite on recup le prix depuis la fonction
     cursorPosition(27,115); 
-    printf("%.2f", prix);
+    printf("%.2f", prix); //et on le print à l'endroit adéquat
 
     cursorPosition(28,115);
-    float recu = payement(prix);
+    float recu = payement(prix); //même chose pour le recu
     cursorPosition(29,115);
     printf("%.2f", recu);
 
