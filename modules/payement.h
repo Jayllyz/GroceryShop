@@ -13,8 +13,8 @@ float payement(float prix)
     }
     if( (sommeClient - prix) <  0) //Le mec à pas suffisament d'argent 
     {
-        printf("error");
-        exit(-1);
+        return -1;
+
     }
     if((sommeClient - prix) > 0) 
     {

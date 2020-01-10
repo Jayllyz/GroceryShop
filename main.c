@@ -4,6 +4,7 @@
 #include "modules/initTab.h"
 #include "modules/recupPrix.h"
 #include "modules/payement.h"
+#include "modules/panier.h"
 
 void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
  {
@@ -11,9 +12,10 @@ void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
 }
 
 
+
 int main()
 {
-	system("clear"); //clear le terminal avant (ca fonctionne pas rip)
+
 
 
 	char* emojiF[] = //chaine pour stocker les emoji
@@ -132,6 +134,21 @@ int main()
     initPrixF(prixF); //initialisation des valeurs pour les tab 
     initPrixL(prixL);
     initPrixV(prixV);
+    
+    char panier[10][2]= 
+    {
+        "o",
+        "o",
+        "o",
+        "o",
+        "o",
+        "o",
+        "o",
+        "o",
+        "o",
+    };
+
+
 
     int caractereActuel = 0;
     FILE* fichier = NULL;
@@ -142,19 +159,87 @@ int main()
         printf("%c", caractereActuel);
     } while ( caractereActuel != EOF); //tant que le fichier n'est pas terminé
 
-    cursorPosition(29,27); //on mets le curseur à l'endroit pour prendre le code
-    char code[4]; // on stocke ce code dans une chaine
-    scanf("%s", code);   
-    printf("%s", code);
-    float prix = 0;
-    prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV); //ensuite on recup le prix depuis la fonction
-    cursorPosition(27,115); 
-    printf("%.2f", prix); //et on le print à l'endroit adéquat
 
-    cursorPosition(28,115);
-    float recu = payement(prix); //même chose pour le recu
-    cursorPosition(29,115);
-    printf("%.2f", recu);
+int j=0,rang;
+int y =28;
+int x =66;
+char code[4]= {0}; // on stocke ce code dans une chaine
+char fin[]= "fin";
+
+    while((panierVide(panier)) >= 1)
+    {
+        cursorPosition(29,27);
+        scanf("%3s", code);
+        if((strcmp(code,fin) !=0))
+        {
+            cursorPosition(27,115);
+            printf("    ");
+            cursorPosition(28,110);
+            printf("              ");
+            cursorPosition(29,108);
+            printf("       ");
+            float prix = 0;
+            prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV); //ensuite on recup le prix depuis la fonction
+            cursorPosition(27,115); 
+            printf("%.2f", prix); //et on le print à l'endroit adéquat
+
+            cursorPosition(28,110);
+            float recu = payement(prix); //même chose pour le recu
+
+                if (recu < 0)
+                {
+                    cursorPosition(28,110); 
+                    printf("erreur montant");
+
+                }
+                else
+                {
+                    cursorPosition(29,108);
+                    printf("%.2f", recu);
+                    rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);
+                    panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,y,x);
+                    strcp(panier[j][1], code);
+                }
+
+        }
+
+        else
+        {
+            break;
+        }
+        cursorPosition(29,27);
+        printf("   ");
+        if(j<=4)
+        {
+            y=27;
+            x+=2;
+        }
+        if(j==5)
+        {
+            y=27;
+            x=66;
+        }
+        if(5 < j < 8)
+        {
+            y=27;
+            x+=2;
+        }
+        if(j==9)
+        {
+            y=26;
+            x=66;
+
+        }
+        if(j > 7)
+        { 
+            y=26;
+            x+=2;
+        }
+        j+=1;
+    }  
+
+    cursorPosition(31,27);
+      
 
     
     fclose(fichier);
