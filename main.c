@@ -7,7 +7,7 @@
 #include "modules/panier.h"
 
 void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
- {
+{
     printf("\033[%d;%dH",YPos,XPos);
 }
 
@@ -49,6 +49,7 @@ int main()
         "F06",
         "F07",
         "F08",
+        "F09",
         "F10",
         "F11",
         "F12",
@@ -87,6 +88,7 @@ int main()
         "L06",
         "L07",
         "L08",
+        "L09",
         "L10",
         "L11",
         "L12",
@@ -124,6 +126,7 @@ int main()
         "V06",
         "V07",
         "V08",
+        "V09",
         "V10",
         "V11",
         "V12",
@@ -137,6 +140,7 @@ int main()
     
     char panier[10][2]= 
     {
+        "o",
         "o",
         "o",
         "o",
@@ -163,85 +167,118 @@ int main()
 int j=0,rang;
 int y =28;
 int x =66;
-char code[4]= {0}; // on stocke ce code dans une chaine
-char fin[]= "fin";
+char code[4]= {0};
+char pay[4]="pay";
+char fin[4]="fin";
+float prixT; 
+float prixA = 0;
 
-    while((panierVide(panier)) >= 1)
+    while((strcmp(code,fin)) !=0)
     {
-        cursorPosition(29,27);
-        scanf("%3s", code);
-        if((strcmp(code,fin) !=0))
-        {
-            cursorPosition(27,115);
-            printf("    ");
-            cursorPosition(28,110);
-            printf("              ");
-            cursorPosition(29,108);
-            printf("       ");
-            float prix = 0;
-            prix = recupPrix(code,codeF,codeL,codeV,prixF,prixL,prixV); //ensuite on recup le prix depuis la fonction
-            cursorPosition(27,115); 
-            printf("%.2f", prix); //et on le print à l'endroit adéquat
-
-            cursorPosition(28,110);
-            float recu = payement(prix); //même chose pour le recu
-
-                if (recu < 0)
+            cursorPosition(29,27);
+            printf("   ");
+            cursorPosition(29,27);
+            scanf("%3s", code);
+            if ((strcmp(code,pay))==0)
+            {
+                cursorPosition(27,115); 
+                printf("   ");
+                cursorPosition(27,115);
+                printf("%.2f", prixT); 
+                cursorPosition(28,110);
+                float recu = payement(prixT);
+                if(recu < 0)
                 {
                     cursorPosition(28,110); 
                     printf("erreur montant");
-
                 }
                 else
                 {
                     cursorPosition(29,108);
-                    printf("%.2f", recu);
-                    rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);
-                    panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,y,x);
-                    strcp(panier[j][1], code);
+                    printf("%f",recu);
+                    cursorPosition(31,25);
+                    printf("Merci à bientôt !");
+
                 }
+            }
 
-        }
+            prixA = recupPrix(code,panier,codeF,codeL,codeV,prixF,prixL,prixV); 
 
-        else
-        {
-            break;
-        }
-        cursorPosition(29,27);
-        printf("   ");
-        if(j<=4)
-        {
-            y=27;
-            x+=2;
-        }
-        if(j==5)
-        {
-            y=27;
-            x=66;
-        }
-        if(5 < j < 8)
-        {
-            y=27;
-            x+=2;
-        }
-        if(j==9)
-        {
-            y=26;
-            x=66;
+                if(prixA == 0)
+                {
+                    cursorPosition(29,27);
+                    printf("    ");
+                    cursorPosition(31,25);
+                    printf("article épuisé");
+                    continue;
+                }
+                else
+                {   
+                     
+                    prixT = prixT + prixA;
+                    cursorPosition(27,115); 
+                    printf("%.2f", prixT); 
 
-        }
-        if(j > 7)
-        { 
-            y=26;
-            x+=2;
-        }
-        j+=1;
-    }  
+                    rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);
+                       if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 )
+                       {
+                            cursorPosition(31,25);
+                            printf("panier plein.");
 
-    cursorPosition(31,27);
-      
+                       }
+                        strcpy(panier[j], code);
+                        j+=1;
+                }
+            if(j == 1)
+            {
+                y=28;
+                x=70;
+            }
+            if(j == 2)
+            {
+                y=28;
+                x=74;
+            }
+            if(j==3)
+            {
+                y=27;
+                x=66;
+            }
+            if(j==4)
+            {
+                y=27;
+                x=70;
+            }
+            if(j==5)
+            {
+                y=27;
+                x=75;
+            }
+            if(j ==6)
+            {
+                y=26;
+                x=66;
+            }
+            if(j==7)
+            {
+                y=26;
+                x=70;
+            }
+            if(j==8)
+            {
+                y=26;
+                x=74;
+            }
+    }   
+             if((strcmp(code,fin)) ==0)
+            {
+                cursorPosition(31,27);
+                printf("Aurevoir");
+                exit(-1);
+            }        
+        
 
-    
+
     fclose(fichier);
 
 
