@@ -12,7 +12,6 @@ void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
 }
 
 
-
 int main()
 {
 
@@ -154,132 +153,111 @@ int main()
 
 
 
-    int caractereActuel = 0;
-    FILE* fichier = NULL;
-    fichier = fopen("vitrine.txt", "r"); //on ouvre le fichier en lecture
-    do
-    {
-        caractereActuel = fgetc(fichier); // On lit le caractère
-        printf("%c", caractereActuel);
-    } while ( caractereActuel != EOF); //tant que le fichier n'est pas terminé
+int caractere = 0;
+FILE* fichier = NULL;
+fichier = fopen("vitrine.txt", "r"); //on ouvre le fichier en lecture
+if( fichier != NULL) //on verifie que le fichier existe bien 
+{ 
+    while ( caractere != EOF) //
+    {   
+        caractere = fgetc(fichier);// On lit le caractère
+            if( caractere == EOF) //si c'est la fin il stop
+            {
+                break;            
+            } 
+        printf("%c", caractere); //on print le caractere récupéré
+    } 
 
+}
+else
+{
+    printf("Fichier manquant ! ");//si le fichier existe pas on informe l'utilisateur
 
-int j=0,rang;
-int y =28;
+}
+fclose(fichier);            
+short int j=0,rang =0;   // création de toutes les variables utiles et chaine de caractere 
+int y =28;      
 int x =66;
-char code[4]= {0};
+char code[4]= {0}; //code entrée par l'utilisateur
 char pay[4]="pay";
 char fin[4]="fin";
-float prixT; 
+float prixT =0; 
 float prixA = 0;
 
     while((strcmp(code,fin)) !=0)
     {
-            cursorPosition(29,27);
-            printf("   ");
-            cursorPosition(29,27);
-            scanf("%3s", code);
-            if ((strcmp(code,pay))==0)
+        cursorPosition(29,27); //on se place à l'endroit  du code et on efface bien ce qu'il y a avant
+        printf("   ");
+        cursorPosition(29,27);
+        scanf("%3s", code); //on scan puis on le mets dans code
+
+            if ((strcmp(code,pay))==0) //on rentre dans cette boucle une fois que l'utilisateur tape "pay"
             {
-                cursorPosition(27,115); 
-                printf("   ");
-                cursorPosition(27,115);
-                printf("%.2f", prixT); 
+
                 cursorPosition(28,110);
                 float recu = payement(prixT);
-                if(recu < 0)
+
+                if(recu < 0) //si le recu est négatif alors l'utilisateur n'a pas donné suffisament
                 {
                     cursorPosition(28,110); 
                     printf("erreur montant");
                 }
                 else
                 {
-                    cursorPosition(29,108);
-                    printf("%f",recu);
-                    cursorPosition(31,25);
+                    cursorPosition(29,108); //sinon on print le recu et le prix 
+                    printf("%.2f",recu);
+                    cursorPosition(27,115);
+                    printf("%.2f", prixT); 
+                    cursorPosition(31,25); 
                     printf("Merci à bientôt !");
+                    break; //puis on ferme la boucle
 
                 }
             }
 
             prixA = recupPrix(code,panier,codeF,codeL,codeV,prixF,prixL,prixV); 
 
-                if(prixA == 0)
-                {
-                    cursorPosition(29,27);
-                    printf("    ");
-                    cursorPosition(31,25);
-                    printf("article épuisé");
-                    continue;
-                }
-                else
-                {   
+            if(prixA == 0)//si l'article vaut 0 c'est car c'est un article déjà payé donc on rentre dans une boucle spécifique
+            {
+                cursorPosition(29,27);
+                printf("    ");
+                cursorPosition(31,25);
+                printf("article épuisé");
+                 continue;//puis on relance la boucle pour le prochain produit
+            }
+            else
+            {   
                      
-                    prixT = prixT + prixA;
-                    cursorPosition(27,115); 
-                    printf("%.2f", prixT); 
+                prixT = prixT + prixA; //on calcule le prix 
+                cursorPosition(27,115); 
+                printf("%.2f", prixT); // et on print
 
-                    rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);
-                       if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 )
-                       {
-                            cursorPosition(31,25);
-                            printf("panier plein.");
+                rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);//on recupére le rang de l'article acheté dans le tableau pour l'utiliser dans une fonction
+                if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 ) //paniereEmoji renvoi 1 c'est car aucune case du panier n'est vide
+                {
+                    cursorPosition(31,25);
+                    printf("panier plein.");
 
-                       }
-                        strcpy(panier[j], code);
-                        j+=1;
                 }
-            if(j == 1)
-            {
-                y=28;
-                x=70;
-            }
-            if(j == 2)
-            {
-                y=28;
-                x=74;
-            }
-            if(j==3)
-            {
-                y=27;
-                x=66;
-            }
-            if(j==4)
-            {
-                y=27;
-                x=70;
-            }
-            if(j==5)
-            {
-                y=27;
-                x=75;
-            }
-            if(j ==6)
-            {
-                y=26;
-                x=66;
-            }
-            if(j==7)
-            {
-                y=26;
-                x=70;
-            }
-            if(j==8)
-            {
-                y=26;
-                x=74;
-            }
-    }   
-             if((strcmp(code,fin)) ==0)
-            {
-                cursorPosition(31,27);
-                printf("Aurevoir");
-                exit(-1);
-            }        
+                    strcpy(panier[j], code); //on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
+                    j+=1; // et on incrémente le nombre d'article payé
+            }   
+        placementPanier(j,&y,&x); //cette fonction place l'emoji en fonction du nombre d'artcile déjà payé
+    }
+
+/*une fois sorti de la boucle principale on vérifie si la boucle est fermé car l'utilisateur à terminé de payer alorson ne fait rien
+mais si l'utilisateur à écrit fin on lance un boucle spécifique */
+
+if((strcmp(code,fin)) ==0)   
+{
+    cursorPosition(27,115);
+    printf("0   "); 
+    cursorPosition(31,27);
+    printf("Aurevoir");
+    exit(-1);   
+} 
         
 
-
-    fclose(fichier);
 
 
     return 0;
