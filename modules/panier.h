@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 int panierEmoji(char code[],char panier[10][2],char* eF[],char* eL[],char* eV[],int rang,int j,int y, int x)
 {
-	if(strcmp(panier[j+1],"o") ==0) //on verifie les cases libres du panier
+	if((strcmp(panier[j+1],"o")) ==0) //on verifie les cases libres du panier
 		{
 			if(code[0] == 'F')//on regarde la première lettre pour savoir dans quel tab chercher
 			{
@@ -39,12 +40,12 @@ void placementPanier(int j,int* y, int* x) //J correspond à la case du panier d
     if(j == 1)
     {
         *y=27; //En fonction de la case les coordonnées change (0 est directement place dans la fonction panierEmoji)
-        *x=70;
+        *x=69;
     }
     if(j == 2)
     {
         *y=27;
-        *x=74;
+        *x=73;
     }
     if(j==3)
     {
@@ -54,12 +55,12 @@ void placementPanier(int j,int* y, int* x) //J correspond à la case du panier d
     if(j==4)
     {
         *y=26;
-        *x=70;
+        *x=69;
     }
     if(j==5)
     {
         *y=26;
-        *x=75;
+        *x=73;
     }
     if(j ==6)
     {
@@ -69,11 +70,14 @@ void placementPanier(int j,int* y, int* x) //J correspond à la case du panier d
     if(j==7)
     {
         *y=25;
-        *x=70;
+        *x=69;
     }
     if(j==8)
     {
         *y=25;
-        *x=74;
+        *x=73;
     }
 }
+
+
+

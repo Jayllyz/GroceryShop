@@ -15,7 +15,7 @@ void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
 int main()
 {
 
-    system("clear");
+    system("clear"); //on clear le terminale avant
 
 	char* emojiF[] = //chaine pour stocker les emoji
     {
@@ -175,7 +175,7 @@ else
 
 }
 fclose(fichier);            
-short int j=0,rang =0;   // création de toutes les variables utiles et chaine de caractere 
+short int j=0,rang =0;   // création de toutes les variables utiles et chaine de caractere, j correspond aux article du panier
 int y =27;      
 int x =66;
 char code[4]= {0}; //code entrée par l'utilisateur
@@ -190,7 +190,8 @@ float prixA;
         printf("   ");
         cursorPosition(28,27);
         scanf("%3s", code); //on scan puis on le mets dans code
-
+        cursorPosition(30,25);
+        printf("                   ");
             if ((strcmp(code,pay))==0) //on rentre dans cette boucle une fois que l'utilisateur tape "pay"
             {
 
@@ -209,9 +210,7 @@ float prixA;
                 else
                 {
                     cursorPosition(28,108); //sinon on print le recu et le prix 
-                    printf("%.2f €",recu);
-                    cursorPosition(26,115);
-                    printf("%.2f €", prixT); 
+                    printf("%.2f €",recu); 
                     cursorPosition(30,25); 
                     printf("Merci à bientôt ! 👋");
                     cursorPosition(79,0); 
@@ -226,7 +225,7 @@ float prixA;
             if(prixA == 0)//si l'article vaut 0 c'est car c'est un article déjà payé donc on rentre dans une boucle spécifique
             {
                 cursorPosition(30,25);
-                printf("              ");
+                printf("              "); //On efface une possible erreur print avant
                 cursorPosition(30,25);
                 printf("⛔ article épuisé ⛔");
                  continue;//puis on relance la boucle pour le prochain produit
@@ -237,25 +236,27 @@ float prixA;
                 prixT = prixT + prixA; //on calcule le prix 
                 cursorPosition(26,115); 
                 printf("%.2f €", prixT); // et on print
-
                 rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);//on recupére le rang de l'article acheté dans le tableau pour l'utiliser dans une fonction
-                if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 ) //paniereEmoji renvoi 1 c'est car aucune case du panier n'est vide
-                {
-                    cursorPosition(30,25);
-                    printf("⛔ panier plein ⛔");
+                    if( (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 ) //panierEmoji renvoi 1  car aucune case du panier n'est vide
+                    {
+                        cursorPosition(30,25);
+                        printf("                ");
+                        cursorPosition(30,25);
+                        printf("⛔ panier plein ⛔");
+                        j-=1; //si le panier est plein il ne faut pas augmenter le nombre d'article donc on fait -1 car juste après il s'incrémente
+                    }
 
+                strcpy(panier[j], code);//on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
+                j+=1;
+                cursorPosition(30,62);
+                if(j > 1)
+                {
+                    printf("Vous avez %d articles", j);
                 }
-                    strcpy(panier[j], code); //on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
-                    j+=1; // et on incrémente le nombre d'article payé
-                    cursorPosition(30,62);
-                    if(j > 1)
-                    {
-                        printf("Vous avez %d articles", j);
-                    }
-                    else
-                    {
-                        printf("Vous avez %d article", j);
-                    }
+                else
+                {
+                    printf("Vous avez %d article", j);
+                }
             }
             else //sinon le code est faux car en cas d'erreur la fonction qui cherche le prix ne return rien
             {
