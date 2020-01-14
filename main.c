@@ -181,8 +181,8 @@ int x =66;
 char code[4]= {0}; //code entrée par l'utilisateur
 char pay[4]="pay";
 char fin[4]="fin";
-float prixT =0; 
-float prixA = 0;
+float prixT=0;
+float prixA;
 
     while((strcmp(code,fin)) !=0)
     {
@@ -195,12 +195,16 @@ float prixA = 0;
             {
 
                 cursorPosition(27,110);
-                float recu = payement(prixT);
+                float recu = 0;
+                recu = payement(prixT);
 
                 if(recu < 0) //si le recu est négatif alors l'utilisateur n'a pas donné suffisament
                 {
                     cursorPosition(27,110); 
-                    printf("erreur montant");
+                    printf("erreur montant ⛔");
+                    cursorPosition(79,0); 
+                    printf(" ");
+                    break;
                 }
                 else
                 {
@@ -221,13 +225,13 @@ float prixA = 0;
 
             if(prixA == 0)//si l'article vaut 0 c'est car c'est un article déjà payé donc on rentre dans une boucle spécifique
             {
-                cursorPosition(28,27);
-                printf("    ");
                 cursorPosition(30,25);
-                printf("article épuisé");
+                printf("              ");
+                cursorPosition(30,25);
+                printf("⛔ article épuisé ⛔");
                  continue;//puis on relance la boucle pour le prochain produit
             }
-            else
+            if(prixA > 0) //Si le prix est bien supérieur à 0
             {   
                      
                 prixT = prixT + prixA; //on calcule le prix 
@@ -238,7 +242,7 @@ float prixA = 0;
                 if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 ) //paniereEmoji renvoi 1 c'est car aucune case du panier n'est vide
                 {
                     cursorPosition(30,25);
-                    printf("panier plein.");
+                    printf("⛔ panier plein ⛔");
 
                 }
                     strcpy(panier[j], code); //on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
@@ -252,8 +256,15 @@ float prixA = 0;
                     {
                         printf("Vous avez %d article", j);
                     }
-                    
-            }   
+            }
+            else //sinon le code est faux car en cas d'erreur la fonction qui cherche le prix ne return rien
+            {
+                cursorPosition(28,27);
+                printf("    ");
+                cursorPosition(30,25);
+                printf("code faux ⛔");
+
+            } 
         placementPanier(j,&y,&x); //cette fonction place l'emoji en fonction du nombre d'artcile déjà payé
     }
 
@@ -264,8 +275,10 @@ if((strcmp(code,fin)) ==0)
 {
     cursorPosition(26,115);
     printf("0   "); 
-    cursorPosition(30,27);
-    printf("Aurevoir");
+    cursorPosition(30,25);
+    printf("Aurevoir 👋");
+    cursorPosition(79,0); 
+    printf(" ");
     exit(-1);   
 } 
         
