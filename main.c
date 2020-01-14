@@ -205,11 +205,13 @@ float prixA = 0;
                 else
                 {
                     cursorPosition(29,108); //sinon on print le recu et le prix 
-                    printf("%.2f",recu);
+                    printf("%.2f €",recu);
                     cursorPosition(27,115);
-                    printf("%.2f", prixT); 
+                    printf("%.2f €", prixT); 
                     cursorPosition(31,25); 
                     printf("Merci à bientôt !");
+                    cursorPosition(80,0); 
+                    printf(" ");
                     break; //puis on ferme la boucle
 
                 }
@@ -230,7 +232,7 @@ float prixA = 0;
                      
                 prixT = prixT + prixA; //on calcule le prix 
                 cursorPosition(27,115); 
-                printf("%.2f", prixT); // et on print
+                printf("%.2f €", prixT); // et on print
 
                 rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);//on recupére le rang de l'article acheté dans le tableau pour l'utiliser dans une fonction
                 if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 ) //paniereEmoji renvoi 1 c'est car aucune case du panier n'est vide
@@ -241,6 +243,16 @@ float prixA = 0;
                 }
                     strcpy(panier[j], code); //on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
                     j+=1; // et on incrémente le nombre d'article payé
+                    cursorPosition(31,62);
+                    if(j > 1)
+                    {
+                        printf("Vous avez %d articles", j);
+                    }
+                    else
+                    {
+                        printf("Vous avez %d article", j);
+                    }
+                    
             }   
         placementPanier(j,&y,&x); //cette fonction place l'emoji en fonction du nombre d'artcile déjà payé
     }
