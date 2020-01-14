@@ -15,7 +15,7 @@ void cursorPosition(int YPos, int XPos) //Fonction pour déplacer le curseur
 int main()
 {
 
-
+    system("clear");
 
 	char* emojiF[] = //chaine pour stocker les emoji
     {
@@ -176,7 +176,7 @@ else
 }
 fclose(fichier);            
 short int j=0,rang =0;   // création de toutes les variables utiles et chaine de caractere 
-int y =28;      
+int y =27;      
 int x =66;
 char code[4]= {0}; //code entrée par l'utilisateur
 char pay[4]="pay";
@@ -186,31 +186,31 @@ float prixA = 0;
 
     while((strcmp(code,fin)) !=0)
     {
-        cursorPosition(29,27); //on se place à l'endroit  du code et on efface bien ce qu'il y a avant
+        cursorPosition(28,27); //on se place à l'endroit  du code et on efface bien ce qu'il y a avant
         printf("   ");
-        cursorPosition(29,27);
+        cursorPosition(28,27);
         scanf("%3s", code); //on scan puis on le mets dans code
 
             if ((strcmp(code,pay))==0) //on rentre dans cette boucle une fois que l'utilisateur tape "pay"
             {
 
-                cursorPosition(28,110);
+                cursorPosition(27,110);
                 float recu = payement(prixT);
 
                 if(recu < 0) //si le recu est négatif alors l'utilisateur n'a pas donné suffisament
                 {
-                    cursorPosition(28,110); 
+                    cursorPosition(27,110); 
                     printf("erreur montant");
                 }
                 else
                 {
-                    cursorPosition(29,108); //sinon on print le recu et le prix 
+                    cursorPosition(28,108); //sinon on print le recu et le prix 
                     printf("%.2f €",recu);
-                    cursorPosition(27,115);
+                    cursorPosition(26,115);
                     printf("%.2f €", prixT); 
-                    cursorPosition(31,25); 
-                    printf("Merci à bientôt !");
-                    cursorPosition(80,0); 
+                    cursorPosition(30,25); 
+                    printf("Merci à bientôt ! 👋");
+                    cursorPosition(79,0); 
                     printf(" ");
                     break; //puis on ferme la boucle
 
@@ -221,9 +221,9 @@ float prixA = 0;
 
             if(prixA == 0)//si l'article vaut 0 c'est car c'est un article déjà payé donc on rentre dans une boucle spécifique
             {
-                cursorPosition(29,27);
+                cursorPosition(28,27);
                 printf("    ");
-                cursorPosition(31,25);
+                cursorPosition(30,25);
                 printf("article épuisé");
                  continue;//puis on relance la boucle pour le prochain produit
             }
@@ -231,19 +231,19 @@ float prixA = 0;
             {   
                      
                 prixT = prixT + prixA; //on calcule le prix 
-                cursorPosition(27,115); 
+                cursorPosition(26,115); 
                 printf("%.2f €", prixT); // et on print
 
                 rang = recupRang(code,codeF,codeL,codeV,prixF,prixL,prixV);//on recupére le rang de l'article acheté dans le tableau pour l'utiliser dans une fonction
                 if(  (panierEmoji(code,panier,emojiF,emojiL,emojiV,rang,j,y,x)) ==1 ) //paniereEmoji renvoi 1 c'est car aucune case du panier n'est vide
                 {
-                    cursorPosition(31,25);
+                    cursorPosition(30,25);
                     printf("panier plein.");
 
                 }
                     strcpy(panier[j], code); //on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
                     j+=1; // et on incrémente le nombre d'article payé
-                    cursorPosition(31,62);
+                    cursorPosition(30,62);
                     if(j > 1)
                     {
                         printf("Vous avez %d articles", j);
@@ -262,9 +262,9 @@ mais si l'utilisateur à écrit fin on lance un boucle spécifique */
 
 if((strcmp(code,fin)) ==0)   
 {
-    cursorPosition(27,115);
+    cursorPosition(26,115);
     printf("0   "); 
-    cursorPosition(31,27);
+    cursorPosition(30,27);
     printf("Aurevoir");
     exit(-1);   
 } 

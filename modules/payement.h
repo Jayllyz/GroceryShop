@@ -7,6 +7,8 @@ float payement(float prix)
     float sommeClient;
     float sommeRendre;
     scanf("%f", &sommeClient);
+    printf("\033[%d;%dH",27,115);
+    printf("€");
     if ( (sommeClient - prix) == 0) //Le payement est bon rien à rendre
     {
         return 0; 

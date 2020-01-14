@@ -38,42 +38,42 @@ void placementPanier(int j,int* y, int* x) //J correspond à la case du panier d
 {
     if(j == 1)
     {
-        *y=28; //En fonction de la case les coordonnées change (0 est directement place dans la fonction panierEmoji)
+        *y=27; //En fonction de la case les coordonnées change (0 est directement place dans la fonction panierEmoji)
         *x=70;
     }
     if(j == 2)
     {
-        *y=28;
+        *y=27;
         *x=74;
     }
     if(j==3)
     {
-        *y=27;
+        *y=26;
         *x=66;
     }
     if(j==4)
     {
-        *y=27;
+        *y=26;
         *x=70;
     }
     if(j==5)
     {
-        *y=27;
+        *y=26;
         *x=75;
     }
     if(j ==6)
     {
-        *y=26;
+        *y=25;
         *x=66;
     }
     if(j==7)
     {
-        *y=26;
+        *y=25;
         *x=70;
     }
     if(j==8)
     {
-        *y=26;
+        *y=25;
         *x=74;
     }
 }
