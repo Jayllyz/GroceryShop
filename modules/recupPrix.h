@@ -11,7 +11,7 @@ float recupPrix(char code[],char panier[10][2], char codeF[15][4], char codeL[15
         if((strcmp(panier[i],code)) !=0 ) //et on verifie que l'utilisateur tape un code qui n'a pas déjà été payé !
         {
 
-		   if(code[0] == 'F')//on regarde la première lettre pour connaitre le tableau
+		  if(code[0] == 'F')//on regarde la première lettre pour connaitre le tableau
     	   {	
         	   for (i = 0; i <= 15 ; i++)   
         	   {
@@ -21,6 +21,7 @@ float recupPrix(char code[],char panier[10][2], char codeF[15][4], char codeL[15
         	  	    }
 			   }
 		   }
+	
     	   if(code[0] == 'L')
     	   {
         	   for (i = 0; i <= 15; i++)   
@@ -31,6 +32,7 @@ float recupPrix(char code[],char panier[10][2], char codeF[15][4], char codeL[15
             	   }
         	   }
     	   }
+
     	   if(code[0] == 'V')
     	   {
         	   for (i = 0; i <= 15; i++)   
@@ -39,7 +41,6 @@ float recupPrix(char code[],char panier[10][2], char codeF[15][4], char codeL[15
             	   {
 				     return prixV[i];
             	   }
-
                }
            }
            else
@@ -50,7 +51,7 @@ float recupPrix(char code[],char panier[10][2], char codeF[15][4], char codeL[15
         }
         else
         {
-            return 0; //si l'article est déjà dans le panier on return 0 puis dans le main on affiche l'erreur
+            return 0; //si l'artcile est déjà dans le panier on return 0 puis dans le main on affiche l'erreur
         }
     }
 }
@@ -61,7 +62,7 @@ float recupPrix(char code[],char panier[10][2], char codeF[15][4], char codeL[15
 //même fonction que au dessus sauf qu'on return le rang  et pas le prix, qu'on a besoin dans la fonction panierEmoji
 int recupRang(char code[], char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[])
 {
-    short int i = 0;
+    int i = 0;
      
         if(code[0] == 'F')
         {   

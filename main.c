@@ -187,7 +187,7 @@ float prixA;
     while((strcmp(code,fin)) !=0)
     {
         cursorPosition(28,27); //on se place à l'endroit  du code et on efface bien ce qu'il y a avant
-        printf("   ");
+        printf("          ");
         cursorPosition(28,27);
         scanf("%3s", code); //on scan puis on le mets dans code
         cursorPosition(30,25);
@@ -199,16 +199,19 @@ float prixA;
                 float recu = 0;
                 recu = payement(prixT);
 
-                if(recu < 0) //si le recu est négatif alors l'utilisateur n'a pas donné suffisament
+                while(recu < 0) //si le recu est négatif alors l'utilisateur n'a pas donné suffisament
                 {
-                    cursorPosition(27,110); 
+                    cursorPosition(24,108); 
                     printf("erreur montant ⛔");
-                    cursorPosition(79,0); 
-                    printf(" ");
-                    break;
+                    cursorPosition(27,110);
+                    printf("    ");
+                    cursorPosition(27,110);
+                    recu = payement(prixT);
                 }
-                else
+                if(recu >=0)
                 {
+                    cursorPosition(24,108);
+                    printf("                  "); //on efface une possible erreur de montant réalisé avant
                     cursorPosition(28,108); //sinon on print le recu et le prix 
                     printf("%.2f €",recu); 
                     cursorPosition(30,25); 
