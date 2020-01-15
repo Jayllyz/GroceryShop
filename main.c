@@ -137,7 +137,7 @@ int main()
     initPrixL(prixL);
     initPrixV(prixV);
     
-    char panier[10][2]= 
+    char panier[10][4]= 
     {
         "o",
         "o",
@@ -223,7 +223,7 @@ float prixA;
                 }
             }
 
-            prixA = recupPrix(code,panier,codeF,codeL,codeV,prixF,prixL,prixV); 
+            prixA = recupPrix(code,panier,codeF,codeL,codeV,prixF,prixL,prixV,j); 
 
             if(prixA == 0)//si l'article vaut 0 c'est car c'est un article déjà payé donc on rentre dans une boucle spécifique
             {

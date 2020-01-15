@@ -3,7 +3,7 @@
 #include <string.h>
 
 
-int panierEmoji(char code[],char panier[10][2],char* eF[],char* eL[],char* eV[],int rang,int j,int y, int x)
+int panierEmoji(char code[],char panier[10][4],char* eF[],char* eL[],char* eV[],int rang,int j,int y, int x)
 {
 	if((strcmp(panier[j+1],"o")) ==0) //on verifie les cases libres du panier
 		{
