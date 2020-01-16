@@ -187,12 +187,12 @@ float prixA;
     while((strcmp(code,fin)) !=0)
     {
         cursorPosition(28,27); //on se place à l'endroit  du code et on efface bien ce qu'il y a avant
-        printf("          ");
+        printf("               ");
         cursorPosition(28,27);
         scanf("%3s", code); //on scan puis on le mets dans code
         cursorPosition(30,25);
         printf("                   ");
-            if ((strcmp(code,pay))==0) //on rentre dans cette boucle une fois que l'utilisateur tape "pay"
+            if ((strcmp(code,pay))==0 && j >= 1) //on rentre dans cette boucle une fois que l'utilisateur tape "pay"
             {
 
                 cursorPosition(27,110);
@@ -263,6 +263,14 @@ float prixA;
             }
             else //sinon le code est faux car en cas d'erreur la fonction qui cherche le prix ne return rien
             {
+                if(j == 0)
+                {
+                    cursorPosition(28,27);
+                    printf("    ");
+                    cursorPosition(30,25);
+                    printf("panier vide ⛔");
+                    continue;
+                }
                 cursorPosition(28,27);
                 printf("    ");
                 cursorPosition(30,25);
