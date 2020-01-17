@@ -263,7 +263,7 @@ float prixA;
             }
             else //sinon le code est faux car en cas d'erreur la fonction qui cherche le prix ne return rien
             {
-                if(j == 0)
+                if(j == 0 && (strcmp(code,pay))==0 )
                 {
                     cursorPosition(28,27);
                     printf("    ");
