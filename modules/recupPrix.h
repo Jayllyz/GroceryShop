@@ -5,7 +5,7 @@
 
 float recupPrix(char code[],char panier[10][4], char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[], int i)
 {    
-    int j;
+    short int j; // variable pour le for
     for(j = i; j >= 0; j--) //J correspond aux dernier articles acheté, on part alors du dernier article jusqu'a 0
     {
         if(strcmp(code,panier[j]) == 0)
@@ -56,7 +56,7 @@ float recupPrix(char code[],char panier[10][4], char codeF[15][4], char codeL[15
 //même fonction que au dessus sauf qu'on return le rang  et pas le prix, qu'on a besoin dans la fonction panierEmoji
 int recupRang(char code[], char codeF[15][4], char codeL[15][4], char codeV[15][4], float prixF[], float prixL[], float prixV[])
 {
-    short int i = 0;
+    short int i = 0; 
      
         if(code[0] == 'F')
         {   

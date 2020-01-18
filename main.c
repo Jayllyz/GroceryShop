@@ -178,7 +178,7 @@ fclose(fichier);
 short int j=0,rang =0;   // création de toutes les variables utiles et chaine de caractere, j correspond aux article du panier
 int y =27;      
 int x =66;
-char code[4]= {0}; //code entrée par l'utilisateur
+char code[5]= {0}; //code entrée par l'utilisateur (on prend une taille de 5 car on prend 4 caractere dans le scanf tout est expliqué pourquoi à coté du scanf)
 char pay[4]="pay";
 char fin[4]="fin";
 float prixT=0;
@@ -189,7 +189,8 @@ float prixA;
         cursorPosition(28,27); //on se place à l'endroit  du code et on efface bien ce qu'il y a avant
         printf("               ");
         cursorPosition(28,27);
-        scanf("%3s", code); //on scan puis on le mets dans code
+        scanf("%4s", code); //on scan puis on le mets dans code (on prend 4 élément pour eviter une faille si l'utilisateur rentre F001 et que l'on récupere F00 cela va foncctionner alors que le code est faux)
+        //donc on prend 4 caractéres pour etre sur d'avoir le bon code
         cursorPosition(30,25);
         printf("                   ");
             if ((strcmp(code,pay))==0 && j >= 1) //on rentre dans cette boucle une fois que l'utilisateur tape "pay"
@@ -249,12 +250,12 @@ float prixA;
                         j-=1; //si le panier est plein il ne faut pas augmenter le nombre d'article donc on fait -1 car juste après il s'incrémente
                     }
 
-                strcpy(panier[j], code);//on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le mets article
-                j+=1;
+                strcpy(panier[j], code);//on mets le code du produit dans panier pour ne pas pouvoir payer deux fois le même article
+                j+=1; //on incrémente le nombre d'article payé
                 cursorPosition(30,62);
                 if(j > 1)
                 {
-                    printf("Vous avez %d articles", j);
+                    printf("Vous avez %d articles", j); //compteur d'articles
                 }
                 else
                 {
@@ -263,7 +264,7 @@ float prixA;
             }
             else //sinon le code est faux car en cas d'erreur la fonction qui cherche le prix ne return rien
             {
-                if(j == 0 && (strcmp(code,pay))==0 )
+                if(j == 0 && (strcmp(code,pay))==0 ) //si le panier et vide et que l'utilisateur tape "pay" on rentre dans ce if
                 {
                     cursorPosition(28,27);
                     printf("    ");
@@ -271,7 +272,7 @@ float prixA;
                     printf("panier vide ⛔");
                     continue;
                 }
-                cursorPosition(28,27);
+                cursorPosition(28,27); //sinon c'est simplement un code  faux
                 printf("    ");
                 cursorPosition(30,25);
                 printf("code faux ⛔");
