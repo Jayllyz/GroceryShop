@@ -1,5 +1,5 @@
 all: PROJET EXCUTION
 PROJET: main.c  
-	gcc -c -Wall main.c -Werror
+	gcc -o EXEC main.o 
 EXCUTION: EXEC
 	./EXEC
